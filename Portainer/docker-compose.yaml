@@ -1,0 +1,30 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:2.27.5
+    container_name: portainer
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/Portainer/portainer_data:/data
+    ports:
+      - "9443:9443"
+      - "9000:9000"
+    environment:
+      - VIRTUAL_http://ntosah77kubernetesomv
+      - PRIORITY=1
+
+  db:
+    image: postgres
+    container_name: db
+    restart: unless-stopped
+    volumes:
+      - /root/Portainer/portainer_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=portainer
+      - POSTGRES_USER=portaineruser
+      - POSTGRES_PASSWORD=portainerpassword
+
+volumes:
+  portainer_data:
+  portainer_db:
+################
