@@ -1,4 +1,4 @@
-```dockerfile name=Dockerfile
+
 # Dockerfile to build Nginx Proxy Manager from source
 
 # Use Node.js for building the frontend assets
@@ -14,8 +14,7 @@ RUN apk add --no-cache git && \
     npm run build
 
 # Stage 2: Use a base image with nginx, certbot, and dependencies for the backend
-FROM jc21/nginx-proxy-manager-base:latest
-
+FROM 'jc21/nginx-proxy-manager:latest'
 # Set working directory
 WORKDIR /app
 
@@ -41,11 +40,11 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 CMD curl 
 
 # Set default command
 CMD ["/app/docker/rootfs/start.sh"]
-```
 
-**Notes:**
-- This Dockerfile builds Nginx Proxy Manager from source, including the frontend assets.
-- It uses a multi-stage build for a smaller final image.
-- Make sure you have access to the `jc21/nginx-proxy-manager-base:latest` image. If not, you may need to build a base image with all necessary dependencies as in the [official repo's Dockerfile](https://github.com/NginxProxyManager/nginx-proxy-manager/blob/develop/Dockerfile).
-- For persistent storage, mount volumes for `/data` and `/etc/letsencrypt` when running the container.
-- Adjust the Node.js version or base images as needed for your environment.
+
+#**Notes:**
+# This Dockerfile builds Nginx Proxy Manager from source, including the frontend assets.
+# It uses a multi-stage build for a smaller final image.
+# Make sure you have access to the `jc21/nginx-proxy-manager-base:latest` image. If not, you may need to build a base image with all necessary dependencies as in the [official repo's Dockerfile](https://github.com/NginxProxyManager/nginx-proxy-manager/blob/develop/Dockerfile).
+# For persistent storage, mount volumes for `/data` and `/etc/letsencrypt` when running the container.
+# Adjust the Node.js version or base images as needed for your environment.
