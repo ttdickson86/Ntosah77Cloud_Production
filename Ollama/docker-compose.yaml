@@ -25,3 +25,4 @@ volumes:
 ##################################
 docker volume create ollama-local
 docker volume create open-webui-local
+
